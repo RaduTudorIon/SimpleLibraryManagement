@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SimpleLibraryManagement.Data.Interfaces
 {
-    public interface IAuthorRepository
+    public interface IAuthorRepository : IRepository<Author>
     {
         IEnumerable<Author> GetAllWithBooks();
-
-        Author GetWithBook(int id);
+        Author GetWithBooks(int id);
     }
 }

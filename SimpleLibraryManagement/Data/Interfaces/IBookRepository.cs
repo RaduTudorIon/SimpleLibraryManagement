@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleLibraryManagement.Data.Interfaces
 {
-    public interface BookRepository 
+    public interface IBookRepository : IRepository<Book>
     {
          IEnumerable<Book> FindWithAuthor(Func<Book, bool> predicate);
 
