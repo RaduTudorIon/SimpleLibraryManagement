@@ -9,6 +9,5 @@ namespace SimpleLibraryManagement.Data.Model
     {
         public int CustomerId { get; set; }
         public string  Name { get; set; }
-        public object Books { get; internal set; }
     }
 }
