@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleLibraryManagement.Data.Interfaces;
 using SimpleLibraryManagement.Data.Model;
+using SimpleLibraryManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,13 +53,25 @@ namespace SimpleLibraryManagement.Controllers
 
         public IActionResult Create()
         {
+            var viewModel = new CreateAuthorViewModel
+            { Referer = Request.Headers["Referer"].ToString() };
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Author author)
+        public IActionResult Create(CreateAuthorViewModel authorVM)
         {
-            _authorRepository.Create(author);
+            if (!ModelState.IsValid)
+            {
+                return View(authorVM);
+            }
+
+            _authorRepository.Create(authorVM.Author);
+
+            if(!String.IsNullOrEmpty(authorVM.Referer))
+                {
+                return Redirect(authorVM.Referer);
+            }
             return RedirectToAction("List");
         }
 
